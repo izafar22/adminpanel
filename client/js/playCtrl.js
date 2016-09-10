@@ -7,7 +7,13 @@ playApp.controller('playCtrl', function($scope, $state, $stateParams,$rootScope,
 
    httpFactory.getList()
     .then(function(videolist){
+      if(videolist){
       $scope.lists=videolist;
+      console.log('recived',$scope.lists);
+    }
+      else {
+        console.log("videolist value not recieved");
+      }
       //$rootScope.list=videolist;
     },function(err){
       console.log(err);

@@ -1,6 +1,6 @@
 	playApp.factory("httpFactory" , function ($http,$q){
    var playerlist;
-   var videolist=[];
+   var videolist;
 	var serverUrl = "http://127.0.0.1:9000/api/"
 	return {
 		youtubehit:function(songObj){
@@ -20,6 +20,7 @@
 				playerlist=res;
 				console.log('----youtube--Playerlist',playerlist.result)
 				videolist=playerlist.result;
+				console.log("value recieved",videolist);
 				defer.resolve(res);
 			})
 			.error(function(err,status){
