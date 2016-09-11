@@ -1,7 +1,9 @@
 playApp.controller('youtubeCtrl',function($scope,youtubeEmbedUtils,httpFactory,$q,$rootScope){
-	$scope.tracker=0;
+	var tracker=0;
     $scope.theBestVideo="ZuyAC4cxBks";
     $scope.theWorstVideo="37N46MqYM50";
+     var lists=[];
+
    console.log('youtubec trl is here',$scope.lists);
    /*console.log($rootScope.list);
     $scope.videolist=$rootScope.list;
@@ -10,7 +12,13 @@ playApp.controller('youtubeCtrl',function($scope,youtubeEmbedUtils,httpFactory,$
     .then(function (videolist){
       $scope.listy=videolist;
       console.log('m done',$scope.listy)
-      console.log('youtubectrl getting executed');          //$rootScope.list=videolist;
+      console.log('youtubectrl getting executed');
+for (var i=0;i<$scope.listy.length;i++){
+var index=$scope.listy[i].indexOf('=');
+var urlPath= $scope.listy[i].slice(index+1);
+    lists.push(urlPath);
+}
+                //$rootScope.list=videolist;
     },function(err){
       console.log(err);
     });
@@ -38,13 +46,17 @@ playApp.controller('youtubeCtrl',function($scope,youtubeEmbedUtils,httpFactory,$
    
     $scope.$on('youtube.player.ended', function ($event, player) {
     console.log("hiiii");
-    // console.log($scope.tracker);
-    //$scope.tracker=$scope.tracker+1;
+    if(tracker <= lists.length){
+    console.log(tracker);
+    $scope.theBestVideo=lists[tracker];
+    tracker=tracker+1;
+    console.log(tracker);
     //consol.lrog($scope.tracker);
     player.playVideo();
+}
   });
 })
-.directive('youtubeVideo', ['$window', 'youtubeEmbedUtils', function ($window, youtubeEmbedUtils) {
+.   directive('youtubeVideo', ['$window', 'youtubeEmbedUtils', function ($window, youtubeEmbedUtils) {
     var uniqId = 1;
 
     // from YT.PlayerState
