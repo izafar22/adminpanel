@@ -2,18 +2,19 @@ playApp.controller('youtubeCtrl',function($scope,youtubeEmbedUtils,httpFactory,$
 	$scope.tracker=0;
     $scope.theBestVideo="ZuyAC4cxBks";
     $scope.theWorstVideo="37N46MqYM50";
-    /*console.log($rootScope.list);
+   console.log('youtubec trl is here',$scope.lists);
+   /*console.log($rootScope.list);
     $scope.videolist=$rootScope.list;
  */
- /*httpFactory.getList()
-    .then(function(videolist){
+ httpFactory.getList()
+    .then(function (videolist){
       $scope.listy=videolist;
-      //$rootScope.list=videolist;
+      console.log('m done',$scope.listy)
+      console.log('youtubectrl getting executed');          //$rootScope.list=videolist;
     },function(err){
       console.log(err);
     });
- */  
-
+ 
     /*httpFactory.getList()
     .then(function(videolist){
       for(var i=0;i < videolist.length;i++)
@@ -30,7 +31,7 @@ playApp.controller('youtubeCtrl',function($scope,youtubeEmbedUtils,httpFactory,$
 */
     
     $scope.playervars={
-        controls:0,
+        controls:1,
         autoplay:1
     };
 

@@ -42,6 +42,7 @@ playApp.controller('homeCtrl',function($scope,$state,httpFactory,$timeout)
         httpFactory.youtubehit({'url':$scope.songUrl})
         .then(function(res){
             console.log('----submit------',res);
+             $state.go('play');
         },function(err){
            console.log(err);
         });
@@ -54,7 +55,7 @@ playApp.controller('homeCtrl',function($scope,$state,httpFactory,$timeout)
 
 
 
-        $state.go('play');
+        
         
   
     };

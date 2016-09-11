@@ -7,7 +7,8 @@ playApp.controller('playCtrl', function($scope, $state, $stateParams,$rootScope,
 
    httpFactory.getList()
     .then(function(videolist){
-      if(videolist){
+      if(videolist)
+      {
       $scope.lists=videolist;
       console.log('recived',$scope.lists);
     }
