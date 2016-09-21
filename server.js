@@ -1,9 +1,9 @@
 
-var	express = require('./config/express'),
+var	express = require('./config/express');
 
-	http = express();
+var app = express();
 
 
-http.listen(9000, function(){
+app.listen(9000, function(){
   console.log('listening on *:9000');
 });
