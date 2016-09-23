@@ -7,6 +7,7 @@ exports.addSong=function(req,res,next){
 	console.log(req.body);
 
 	if(req.body){
+        console.log(req.body.url);
 		playlist.push(req.body.url);
 	}
 	console.log(playlist)

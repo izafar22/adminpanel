@@ -1,4 +1,6 @@
-playApp.service ('youtubeEmbedUtils', ['$window', '$rootScope', function ($window, $rootScope) {
+(function(){
+   
+    var youtubeEmbedUtils=function($window, $rootScope){
     var Service = {};
 
     // adapted from http://stackoverflow.com/a/5831191/1614967
@@ -100,4 +102,10 @@ playApp.service ('youtubeEmbedUtils', ['$window', '$rootScope', function ($windo
     }
 
     return Service;
-}]);
+};
+    
+    youtubeEmbedUtils.$inject=['$window', '$rootScope'];
+    
+    angular.module('playApp')
+    .service('youtubeEmbedUtils',youtubeEmbedUtils);
+}());

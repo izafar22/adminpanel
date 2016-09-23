@@ -1,9 +1,12 @@
-	playApp.factory("httpFactory" , function ($http,$q){
+(function(){
+var httpFactory=function($http,$q){
    var playerlist;
    var videolist;
-	var serverUrl = "http://127.0.0.1:9000/api/"
-	return {
-		youtubehit:function(songObj){
+	var serverUrl = "http://127.0.0.1:9000/api/";
+	
+    return {
+		
+        youtubehit:function(songObj){
              
               var req={
               	method:"POST",
@@ -13,20 +16,9 @@
               	},
               	data:songObj
               }
-              var defer=$q.defer();
-
-			$http(req).success(function(res){
-				console.log('service---------',res);
-				playerlist=res;
-				console.log('----youtube--Playerlist',playerlist.result)
-				videolist=playerlist.result;
-				console.log("value recieved",videolist);
-				defer.resolve(res);
-			})
-			.error(function(err,status){
-				defer.reject(err);
-			})
-			return defer.promise;
+             console.log('youtubehit service getting loaded');
+            
+			return $http(req);
 			
 		},
 		getPlaylist:function(callback){
@@ -48,12 +40,11 @@
 
 		},
 		setList:function(list){
-          playerlist=list;
+          videolist=list;
 		},
-		getList:function(){
-			var defer=$q.defer();
-			defer.resolve(videolist);
-			return defer.promise;
+		
+        getList:function(){
+			return videolist;
 		},
 		videoIdgen:function(obj){
           var index=obj.indexof('=');
@@ -63,6 +54,11 @@
 
 	}	
 
-})
 
-	
+
+};
+ httpFactory.$inject=['$http','$q'];
+    angular.module('playApp')
+    .factory('httpFactory',httpFactory);
+    
+}());

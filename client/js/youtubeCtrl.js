@@ -1,42 +1,24 @@
-playApp.controller('youtubeCtrl',function($scope,youtubeEmbedUtils,httpFactory,$q,$rootScope){
-	var tracker=0;
+(function(){
+
+    var youtubeCtrl=function($scope,youtubeEmbedUtils,httpFactory){
+    var tracker=0;
     $scope.theBestVideo="ZuyAC4cxBks";
     $scope.theWorstVideo="37N46MqYM50";
      var lists=[];
 
    console.log('youtubec trl is here',$scope.lists);
-   /*console.log($rootScope.list);
-    $scope.videolist=$rootScope.list;
- */
- httpFactory.getList()
-    .then(function (videolist){
-      $scope.listy=videolist;
-      console.log('m done',$scope.listy)
-      console.log('youtubectrl getting executed');
-for (var i=0;i<$scope.listy.length;i++){
-var index=$scope.listy[i].indexOf('=');
-var urlPath= $scope.listy[i].slice(index+1);
-    lists.push(urlPath);
+  
+function init()
+    {
+ $scope.listy=httpFactory.getList();
+   
+ lists=$scope.listy.map(function(video){
+        var index=video.indexOf("=");
+        var urlpath=video.slice(index+1);
+        return urlpath;
+    });
 }
-                //$rootScope.list=videolist;
-    },function(err){
-      console.log(err);
-    });
- 
-    /*httpFactory.getList()
-    .then(function(videolist){
-      for(var i=0;i < videolist.length;i++)
-      {
-        var index=videolist[i].indexOf('=');
-        var urlPath = videolist[i].slice(index + 1);
-        $scope.videoList.push(urlpath);
-      }
-     console.log(videoList);
-
-    },function(err){
-      console.log(err);
-    });
-*/
+ init();
     
     $scope.playervars={
         controls:1,
@@ -55,8 +37,10 @@ var urlPath= $scope.listy[i].slice(index+1);
     player.playVideo();
 }
   });
-})
-.   directive('youtubeVideo', ['$window', 'youtubeEmbedUtils', function ($window, youtubeEmbedUtils) {
+};
+    
+var youtubeVideo=function($window, youtubeEmbedUtils){
+
     var uniqId = 1;
 
     // from YT.PlayerState
@@ -202,4 +186,12 @@ var urlPath= $scope.listy[i].slice(index+1);
             });
         }
     };
-}]);
+//}]);
+};
+youtubeCtrl.$inject=['$scope','youtubeEmbedUtils','httpFactory'];
+    youtubeVideo.$inject=['$window', 'youtubeEmbedUtils'];
+
+    angular.module('playApp')
+    .controller('youtubeCtrl',youtubeCtrl)
+    .directive('youtubeVideo',youtubeVideo);
+}());
