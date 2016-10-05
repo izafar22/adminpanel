@@ -1,6 +1,6 @@
 (function(){
 
-var homeCtrl=function($scope,$state,httpFactory,$timeout)
+var homeCtrl=function($scope,$state,httpFactory,$interval)
                    {
 
     console.log("homeCtrl loaded--");
@@ -8,21 +8,22 @@ var homeCtrl=function($scope,$state,httpFactory,$timeout)
     
     $scope.submit = function(){
         console.log($scope.songUrl);
-        httpFactory.youtubehit({'url':$scope.songUrl})
+        var callee =function(){
+            httpFactory.youtubehit({'url':$scope.songUrl})
         .then(function(res){
             console.log('----submit------',res.data.result);
             httpFactory.setList(res.data.result); 
             $state.go('play');
         },function(err){
            console.log(err);
-        });
-      
+        })};
+        $interval(callee,10000);
     };
 
 
 };
     
-homeCtrl.$inject=['$scope','$state','httpFactory','$timeout'];
+homeCtrl.$inject=['$scope','$state','httpFactory','$interval'];
  angular.module('playApp')
   .controller('homeCtrl',homeCtrl); 
 }());

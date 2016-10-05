@@ -30,13 +30,13 @@ var httpFactory=function($http,$q){
               		'Content-Type': 'application/json'
               	},
               }
-
-			$http(req).then(function(success){
+          $http(req).then(function(success){
 				console.log(success);
 				callback(null,success);
 			},function(err){
 				callback(err,null);
 			});
+			
 
 		},
 		setList:function(list){
