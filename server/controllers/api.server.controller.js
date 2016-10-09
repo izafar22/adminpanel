@@ -1,4 +1,4 @@
-//var User = require('mongoose').model('User');
+
 
 var playlist = [];
 
@@ -8,25 +8,12 @@ exports.addSong=function(req,res,next){
         if (playlist.indexOf(req.body.url) == -1) {
     playlist.push(req.body.url);
                                  }
-	
-	
+
 	console.log(playlist);
 
 	res.json({"error":0,"errorMsg":"Registered success.", "result": playlist});
       
-   /*var songList = new Song(req.body); 
-   songList.save(function(err,result){
-   	console.log('---Song Data---',result);
-if(!err){
-
-				res.json({"error":0,"errorMsg":"Registered success.", "result": result});
-	            return true;
-			}else{
-				res.json({"error":1,"errorMsg":err});
-	            return true;
-			}
-   })*/
-}
+};
 
 
 exports.getPlaylist = function(req,res){
@@ -34,7 +21,20 @@ exports.getPlaylist = function(req,res){
 	res.json({"error":0,"errorMsg":"Registered success.", "result": playlist});
 
 
-}
+};
 
 exports.getPlaylist=function(req,res,next){ 
+};
+
+exports.deleteSong=function(req,res){
+	console.log(req.body.url);
+	if(playlist.indexOf(req.body.url)!=-1)
+	{
+		var index=playlist.indexOf(req.body.url);
+		var deleted=playlist.splice(index,1);
+	     console.log('---song deleted----',deleted);
+	     console.log('-------playlist-----',playlist);
+	res.json({"error":0,"errorMsg":"Registered success.", "result": playlist});
+
+	}
 };

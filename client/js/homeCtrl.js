@@ -8,21 +8,21 @@ var homeCtrl=function($scope,$state,httpFactory,$interval)
     
     $scope.submit = function(){
         console.log($scope.songUrl);
-        var callee =function(){
+    var callee =function(){
             httpFactory.youtubehit({'url':$scope.songUrl})
         .then(function(res){
             console.log('----submit------',res.data.result);
             httpFactory.setList(res.data.result); 
             $state.go('play');
-            $scope.$watch();
         },function(err){
            console.log(err);
-        })};
-        callee();
-        $interval(callee,10000);
+        });
     };
+    callee();
+    $interval(callee,10000);
 
 
+};
 };
     
 homeCtrl.$inject=['$scope','$state','httpFactory','$interval'];

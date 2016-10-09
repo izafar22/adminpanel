@@ -1,5 +1,6 @@
 (function(){
 var httpFactory=function($http,$q){
+   var count=0;
    var playerlist;
    var videolist;
 	var serverUrl = "http://127.0.0.1:9000/api/";
@@ -46,11 +47,27 @@ var httpFactory=function($http,$q){
         getList:function(){
 			return videolist;
 		},
-		videoIdgen:function(obj){
-          var index=obj.indexof('=');
-          var urlPath = obj.slice(index + 1);
-          return urlPath;
-		}
+
+    setCount:function(){
+
+    },
+
+    getCount:function(){
+
+    },
+
+    deleteSong:function(videoObj){
+      var req={
+                method:"POST",
+                url: serverUrl + "deleteSong",
+                headers:{
+                  'Content-Type': 'application/json'
+                },
+                data:videoObj
+              }
+                  console.log('deleted song----');
+              return $http(req);
+    }
 
 	}	
 

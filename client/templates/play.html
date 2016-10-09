@@ -18,7 +18,7 @@
 
 	                    <div class="media-body">
 
-	                        <div class="media" ng-repeat="videos in lists track by $index">{{videos}}
+	                        <div class="media" ng-repeat="videos in lists track by $index">{{videos}} <button type="button" class="btn btn-danger" ng-click="delete(videos)" > delete </button>
 	                            <a class="pull-left" href="#">
 	                                <img class="media-object img-circle" style="max-height:40px;" src="assets/img/user.gif" />
 	                            </a>

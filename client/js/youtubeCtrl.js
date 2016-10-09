@@ -1,6 +1,6 @@
 (function(){
 
-    var youtubeCtrl=function($scope,youtubeEmbedUtils,httpFactory){
+    var youtubeCtrl=function($scope,youtubeEmbedUtils,httpFactory,$interval){
     var tracker=0;
     $scope.theBestVideo="ZuyAC4cxBks";
     $scope.theWorstVideo="37N46MqYM50";
@@ -10,13 +10,16 @@
   
 function init()
     {
+        $interval(function(){
  $scope.listy=httpFactory.getList();
-   
- lists=$scope.listy.map(function(video){
+   lists=$scope.listy.map(function(video){
         var index=video.indexOf("=");
         var urlpath=video.slice(index+1);
         return urlpath;
     });
+
+   },10000);
+ 
 }
  init();
     
@@ -188,7 +191,7 @@ var youtubeVideo=function($window, youtubeEmbedUtils){
     };
 //}]);
 };
-youtubeCtrl.$inject=['$scope','youtubeEmbedUtils','httpFactory'];
+youtubeCtrl.$inject=['$scope','youtubeEmbedUtils','httpFactory','$interval'];
     youtubeVideo.$inject=['$window', 'youtubeEmbedUtils'];
 
     angular.module('playApp')

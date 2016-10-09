@@ -18,7 +18,7 @@ module.exports = function(){
 	
 	require('../server/routes/api.server.routes')(app);
     
-	module.exports=app;
+	
 	return app;
 	
 }
