@@ -1,5 +1,6 @@
 (function(){
 var httpFactory=function($http,$q){
+   var setdel="";
    var count=0;
    var playerlist;
    var videolist;
@@ -22,23 +23,16 @@ var httpFactory=function($http,$q){
 			return $http(req);
 			
 		},
-		getPlaylist:function(callback){
-             
+		getPlaylist:function(){
+             console.log("getPlaylist is getting called");
               var req={
               	method:"GET",
               	url: serverUrl + "getPlaylist",
               	headers:{
               		'Content-Type': 'application/json'
-              	},
-              }
-          $http(req).then(function(success){
-				console.log(success);
-				callback(null,success);
-			},function(err){
-				callback(err,null);
-			});
-			
-
+              	}
+              };
+     return $http(req);    
 		},
 		setList:function(list){
           videolist=list;
@@ -48,16 +42,8 @@ var httpFactory=function($http,$q){
 			return videolist;
 		},
 
-    setCount:function(){
-
-    },
-
-    getCount:function(){
-
-    },
-
     deleteSong:function(videoObj){
-      var req={
+      var request={
                 method:"POST",
                 url: serverUrl + "deleteSong",
                 headers:{
@@ -65,14 +51,17 @@ var httpFactory=function($http,$q){
                 },
                 data:videoObj
               }
-                  console.log('deleted song----');
-              return $http(req);
+                  //console.log('deleted song----',videoObj);
+              return $http(request);
+    },
+    setDelete:function(video){
+      setdel=video;
+    },
+    getDelete:function(){
+      return setdel;
     }
 
 	}	
-
-
-
 };
  httpFactory.$inject=['$http','$q'];
     angular.module('playApp')

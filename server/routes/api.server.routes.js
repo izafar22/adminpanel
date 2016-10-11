@@ -11,7 +11,7 @@ module.exports = function(app){
 
 
        app.route('/api/getPlaylist')
-       .post(api.getPlaylist);
+       .get(api.getPlaylist);
 
        app.route('/api/deleteSong')
      .post(api.deleteSong);
