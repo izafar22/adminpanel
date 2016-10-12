@@ -1,14 +1,11 @@
 (function(){
 var httpFactory=function($http,$q){
-   var setdel="";
-   var count=0;
-   var playerlist;
-   var videolist;
-	var serverUrl = "http://127.0.0.1:9000/api/";
+ 	
+  var serverUrl = "http://127.0.0.1:9000/api/";
 	
     return {
 		
-        youtubehit:function(songObj){
+        addSong:function(songObj){
              
               var req={
               	method:"POST",
@@ -18,7 +15,7 @@ var httpFactory=function($http,$q){
               	},
               	data:songObj
               }
-             console.log('youtubehit service getting loaded');
+             console.log('addSong service getting loaded');
             
 			return $http(req);
 			
@@ -34,14 +31,7 @@ var httpFactory=function($http,$q){
               };
      return $http(req);    
 		},
-		setList:function(list){
-          videolist=list;
-		},
 		
-        getList:function(){
-			return videolist;
-		},
-
     deleteSong:function(videoObj){
       var request={
                 method:"POST",
@@ -53,14 +43,7 @@ var httpFactory=function($http,$q){
               }
                   //console.log('deleted song----',videoObj);
               return $http(request);
-    },
-    setDelete:function(video){
-      setdel=video;
-    },
-    getDelete:function(){
-      return setdel;
     }
-
 	}	
 };
  httpFactory.$inject=['$http','$q'];

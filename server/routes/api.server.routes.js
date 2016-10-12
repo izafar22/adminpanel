@@ -10,10 +10,10 @@ module.exports = function(app){
        .post(api.addSong);
 
 
-       app.route('/api/getPlaylist')
+    app.route('/api/getPlaylist')
        .get(api.getPlaylist);
 
-       app.route('/api/deleteSong')
+    app.route('/api/deleteSong')
      .post(api.deleteSong);
 
 

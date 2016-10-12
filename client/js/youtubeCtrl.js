@@ -10,14 +10,15 @@
   
 function init()
     {
-        $interval(function(){
- $scope.listy=httpFactory.getList();
-   lists=$scope.listy.map(function(video){
+        $interval(function(){ 
+ httpFactory.getPlaylist()
+ .then(function(res){
+    lists=res.data.result.map(function(video){
         var index=video.indexOf("=");
         var urlpath=video.slice(index+1);
         return urlpath;
     });
-
+ }); 
    },10000);
  
 }
