@@ -17,11 +17,14 @@ $interval(getList,1000);
   $scope.delete=function(video){
   	
     var vobj={"url":video};
-     console.log('--------vobj-----',vobj);
        	httpFactory.deleteSong(vobj)
   	.then(function(res){
-  		console.log('----deleted-play-----',res.data.result)
-      httpFactory.setDelete(video);
+      if(res.data.result
+        ==="No Song to Play"){
+        $scope.name=true;
+        console.log('--nghide activated--',name);
+      }
+  		console.log('----deleted-play-----',res.data.result);
   	},function(err){
   		console.log(err);
   	});

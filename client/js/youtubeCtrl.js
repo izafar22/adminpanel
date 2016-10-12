@@ -3,10 +3,9 @@
     var youtubeCtrl=function($scope,youtubeEmbedUtils,httpFactory,$interval){
     var tracker=0;
     $scope.theBestVideo="ZuyAC4cxBks";
-    $scope.theWorstVideo="37N46MqYM50";
      var lists=[];
 
-   console.log('youtubec trl is here',$scope.lists);
+   
   
 function init()
     {
@@ -16,8 +15,9 @@ function init()
     lists=res.data.result.map(function(video){
         var index=video.indexOf("=");
         var urlpath=video.slice(index+1);
-        return urlpath;
-    });
+        return urlpath; 
+    });  
+ console.log('---######urlpath----',lists);
  }); 
    },10000);
  
@@ -32,6 +32,7 @@ function init()
    
     $scope.$on('youtube.player.ended', function ($event, player) {
     console.log("hiiii");
+    console.log('I am tracker',tracker);
     if(tracker <= lists.length){
     console.log(tracker);
     $scope.theBestVideo=lists[tracker];

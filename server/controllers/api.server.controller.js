@@ -19,16 +19,14 @@ exports.addSong=function(req,res,next){
 exports.getPlaylist = function(req,res){
 	if(playlist.length > 0)
 {
-	console.log("playlist----kya kehna");
+	console.log("---playlist----",playlist);
 	res.json({"error":0,"errorMsg":"Registered success.", "result": playlist});
 }
 else
 {
-	var arr=["no song to play"];
-	console.log(arr);
-  res.json({"error":0,"errorMsg":"Registered success.", "result": arr});	
+	var arr=['no song to play'];
+ res.json({"error":0,"errorMsg":"Registered success.", "result": arr});    
 }
-
 
 };
 
@@ -40,10 +38,10 @@ exports.deleteSong=function(req,res){
 		var deleted=playlist.splice(index,1);
 	     console.log('---song deleted----',deleted);
 	     console.log('-------playlist-----',playlist);
-	     if(playlist.length > 0)    	
+   if(playlist.length > 0)    	
 	{
 		res.json({"error":0,"errorMsg":"Registered success.", "result": playlist});
-}
+    }
  else
  {
  	var str="No Song to Play";
