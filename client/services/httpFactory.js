@@ -1,12 +1,11 @@
 (function(){
-var httpFactory=function($http,$q){
+var httpFactory=function($http){
  	var firstSong="";
   var serverUrl = "http://127.0.0.1:9000/api/";
-	
     return {
-
       setFirstSong:function(url){
          var index=url.indexOf("=");
+         console.log(index);
         var urlpath=url.slice(index+1);
          firstSong=urlpath;
       },
@@ -15,7 +14,7 @@ var httpFactory=function($http,$q){
         return firstSong;
       },
 		
-        addSong:function(songObj){
+      addSong:function(songObj){
              
               var req={
               	method:"POST",
@@ -56,7 +55,7 @@ var httpFactory=function($http,$q){
     }
 	}	
 };
- httpFactory.$inject=['$http','$q'];
+ httpFactory.$inject=['$http'];
     angular.module('playApp')
     .factory('httpFactory',httpFactory);
     

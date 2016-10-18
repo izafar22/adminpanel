@@ -24,8 +24,8 @@ exports.getPlaylist = function(req,res){
 }
 else
 {
-	var arr=['no song to play'];
- res.json({"error":0,"errorMsg":"Registered success.", "result": arr});    
+	var str="No Song to Play";
+ res.json({"error":0,"errorMsg":"Registered success.", "result": str});    
 }
 
 };

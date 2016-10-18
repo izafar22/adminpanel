@@ -32,6 +32,11 @@ angular.module('playApp', ['ui.router'])
             'youtubeview@play':{
             templateUrl:'templates/youtube.html',
             controller:'youtubeCtrl'}} 
+        })
+
+        .state('addSong',{
+            url:'/addSong',
+            templateUrl:'templates/addSong.html'
         });
         
         

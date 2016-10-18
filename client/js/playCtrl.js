@@ -37,8 +37,7 @@ $interval(getList,1000);
             httpFactory.addSong({'url':$scope.musicUrl})
         .then(function(res){
             console.log('----submit------',res.data.result);
-   
-            $state.go('play');
+            $scope.musicUrl="";
         },function(err){
            console.log(err);
         });

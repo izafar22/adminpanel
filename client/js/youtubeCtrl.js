@@ -13,8 +13,9 @@ function init()
  httpFactory.getPlaylist()
  .then(function(res){
     lists=res.data.result.map(function(video){
-        var index=video.indexOf("=");
-        var urlpath=video.slice(index+1);
+        var index=video.indexOf("v=");
+        console.log(index);
+        var urlpath=video.slice(index+2);
         return urlpath; 
     });  
  console.log('---######urlpath----',lists);
