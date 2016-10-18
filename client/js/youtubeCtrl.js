@@ -1,8 +1,8 @@
 (function(){
 
     var youtubeCtrl=function($scope,youtubeEmbedUtils,httpFactory,$interval){
-    var tracker=0;
-    $scope.theBestVideo="ZuyAC4cxBks";
+    var tracker=1;
+    $scope.theBestVideo=httpFactory.getFirstSong();
      var lists=[];
 
    

@@ -1,9 +1,19 @@
 (function(){
 var httpFactory=function($http,$q){
- 	
+ 	var firstSong="";
   var serverUrl = "http://127.0.0.1:9000/api/";
 	
     return {
+
+      setFirstSong:function(url){
+         var index=url.indexOf("=");
+        var urlpath=url.slice(index+1);
+         firstSong=urlpath;
+      },
+
+      getFirstSong:function(){
+        return firstSong;
+      },
 		
         addSong:function(songObj){
              

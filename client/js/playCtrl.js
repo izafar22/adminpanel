@@ -29,7 +29,22 @@ $interval(getList,1000);
   		console.log(err);
   	});
   
-  }
+  };
+
+  $scope.submit = function(){
+        console.log($scope.musicUrl);
+   
+            httpFactory.addSong({'url':$scope.musicUrl})
+        .then(function(res){
+            console.log('----submit------',res.data.result);
+   
+            $state.go('play');
+        },function(err){
+           console.log(err);
+        });
+    };
+
+
 
 };
     playCtrl.$inject=['$scope', '$state', '$stateParams', 'httpFactory','$interval'];

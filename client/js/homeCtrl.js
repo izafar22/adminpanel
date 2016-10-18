@@ -8,6 +8,7 @@ var homeCtrl=function($scope,$state,httpFactory,$interval)
     
     $scope.submit = function(){
         console.log($scope.songUrl);
+        httpFactory.setFirstSong($scope.songUrl);
    
             httpFactory.addSong({'url':$scope.songUrl})
         .then(function(res){
