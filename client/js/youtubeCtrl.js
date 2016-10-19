@@ -3,10 +3,7 @@
     var youtubeCtrl=function($scope,youtubeEmbedUtils,httpFactory,$interval){
     var tracker=1;
     $scope.theBestVideo=httpFactory.getFirstSong();
-     var lists=[];
-
-   
-  
+     var lists=[]; 
 function init()
     {
         $interval(function(){ 
@@ -34,7 +31,7 @@ function init()
     $scope.$on('youtube.player.ended', function ($event, player) {
     console.log("hiiii");
     console.log('I am tracker',tracker);
-    if(tracker <= lists.length){
+    if(tracker < lists.length){
     console.log(tracker);
     $scope.theBestVideo=lists[tracker];
     tracker=tracker+1;
@@ -42,7 +39,14 @@ function init()
     //consol.lrog($scope.tracker);
     player.playVideo();
 }
+else{
+    tracker=0;
+    $scope.theBestVideo=lists[tracker];
+    tracker++;
+    player.playVideo();
+}
   });
+
 };
     
 var youtubeVideo=function($window, youtubeEmbedUtils){
