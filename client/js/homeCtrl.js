@@ -9,6 +9,8 @@ var count=0;
     
     $scope.submit = function(){
         console.log($scope.songUrl);
+        if($scope.songUrl.slice(0,32)==="https://www.youtube.com/watch?v=")
+      {  
         httpFactory.getPlaylist()
         .then(function(res){
            if(res.data.result==="No Song to Play"){
@@ -29,6 +31,9 @@ var count=0;
          }
             
         });
+    }
+    else{
+      return;}
     };
    
 };

@@ -33,7 +33,9 @@ $interval(getList,1000);
 
   $scope.submit = function(){
         console.log($scope.musicUrl);
-   
+
+            if($scope.musicUrl.slice(0,32)==="https://www.youtube.com/watch?v=")
+{
             httpFactory.addSong({'url':$scope.musicUrl})
         .then(function(res){
             console.log('----submit------',res.data.result);
@@ -41,6 +43,9 @@ $interval(getList,1000);
         },function(err){
            console.log(err);
         });
+    }
+    else
+      {return;}
     };
 
 
