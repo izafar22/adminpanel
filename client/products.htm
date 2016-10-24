@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aj Exports </title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/jquery-jvectormap-2.0.1.css" />
+<link href="css/green.css" rel="stylesheet" />
+<link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.min.js"></script>
+<script src="js/Studentsdetails.js" type="text/javascript"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+<script type="text/javascript">
+    $(document).ready(function(){
+    $.ajax({
+        type: "POST",
+        url: "code.aspx/CompanyAgentDetail",
+        data: '{}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: GetAllAgentDetails,
+        failure: function (response) {
+            alert(response.d);
+        },
+        error: function (response) {
+            alert(response.d);
+        }
+    });
+    });
+    function GetAllAgentDetails(response) {
+        var xmlDoc = $.parseXML(response.d);
+        var xml = $(xmlDoc);
+        var Companyagent = xml.find("AllCompanyAgent");
+        var row = 1;
+        Companyagent.each(function () {
+            var companyagent = $(this);
+            $("#tblcompanyagent tbody").append("<tr><td>" + row + "</td><td>" + companyagent.find("doct_number").text() + "</td><td>" + companyagent.find("company_name").text() + "</td><td>" + companyagent.find("companyB_name").text() + "</td><td>" + companyagent.find("contact_person_name").text() + "</td><td>" + companyagent.find("Mobile_number").text() + "</td><td>" + companyagent.find("email").text() + "</td><td>" + companyagent.find("state").text() + "</td><td>" + companyagent.find("Area_locality").text() + "</td><td>" + companyagent.find("Address").text() + "</td><td>" + companyagent.find("pin_number").text() + "</td><td>" + companyagent.find("remark").text() +
+             "</td><td><div class='btn-group pull-right'><a onclick='SetEditAgentDetail(" + companyagent.find("id").text() + ");' class='btn btn-sm btn-default'><i class='fa fa-edit'></i> Edit</a><button type='button' data-toggle='dropdown' class='btn btn-sm btn-default dropdown-toggle'><span class='caret'></span></button><ul class='dropdown-menu'><li><a href='javascript:void(0)' onclick='DeleteAgentDetail(" + companyagent.find("id").text() + ");' ><i class='fa fa-trash'></i> Delete</a></li></ul></div></td></tr>")
+            row++;
+        });
+        if (Companyagent.length == 0)
+            $("#tblcompanyagent tbody").append("<tr><td colspan=\"13\" style=\"text-align:center;height: 130px;line-height: 130px; color:grey; font-size:30px;\">No record found...</td></tr>");
+        $("#loader").hide();
+    }
+
+</script>
+<style>
+    .hide-alert
+    {
+        display: none;
+    }
+    .scroll::-webkit-scrollbar
+    {
+        width: 12px;
+    }
+    
+    .scroll::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+    
+    .scroll::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+</style>
+</head>
+<body class="nav-md">
+    <form id="form1">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-globe"></i><span>AJ Exports</span></a>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <!-- menu profile quick info -->
+                    <div class="profile">
+                        <div class="profile_pic">
+                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>
+                                Imran Zaffar</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <br>
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section active">
+                            <h3>
+                                &nbsp;</h3>
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-tachometer"></i>Dashboard</a> </li>
+                                <li class="active"><a><i class="fa fa-shopping-cart"></i>Products <span class="fa fa-chevron-down">
+                                </span></a>
+                                    <ul class="nav child_menu" style="display: block;">
+                                        <li class="current-page"><a href="products.htm">View</a></li>
+                                        <li><a href="index.html">Add</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a><a data-toggle="tooltip"
+                                data-placement="top" title="" data-original-title="FullScreen"><span class="glyphicon glyphicon-fullscreen"
+                                    aria-hidden="true"></span></a><a data-toggle="tooltip" data-placement="top" title=""
+                                        data-original-title="Lock"><span class="glyphicon glyphicon-eye-close" aria-hidden="true">
+                                        </span></a><a data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout">
+                                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/img.jpg" alt="">KK Singh
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+              
+              </ul>
+            </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main" style="min-height: 3392px;">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>
+                                Product Lists</h3>
+                        </div>
+                        <div class="title_right">
+                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            Go!</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <div class="x_panel">
+                        <div class="x_content">
+                            
+
+                            <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            
+                              <th class="column-title">S.n </th>
+                             <th class="column-title">Image</th>
+                            <th class="column-title">SKU </th>
+                            <th class="column-title">Title </th>
+                            <th class="column-title">Brand</th>
+                            <th class="column-title">Size</th>
+                            <th class="column-title">Quantity</th>
+                            <th class="column-title">Weight</th>
+                            <th class="column-title">Type</th>
+                            <th class="column-title">Price</th>
+                            <th class="column-title">Description</th>
+                            <th class="column-title">Key Words</th>
+                        
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                             1
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12131</td>
+                            <td class=" ">Office furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">4</td>
+                            <td class=" ">10kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">2999</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+                          <tr class="odd pointer">
+                         <td class="a-center ">
+                             2
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12132</td>
+                            <td class=" ">Office furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">4</td>
+                            <td class=" ">10kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">3999</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+                          <tr class="even pointer">
+                      <td class="a-center ">
+                             3
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12133</td>
+                            <td class=" ">furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">5</td>
+                            <td class=" ">14kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">3699</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+                          <tr class="odd pointer">
+                           <td class="a-center ">
+                             4
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12134</td>
+                            <td class=" ">furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">7</td>
+                            <td class=" ">14kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">3609</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem gv sporem</td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                             5
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12135</td>
+                            <td class=" ">furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" "95</td>
+                            <td class=" ">44kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">10699</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+                          <tr class="odd pointer">
+                           <td class="a-center ">
+                             6
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12136</td>
+                            <td class=" ">furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">8</td>
+                            <td class=" ">34kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">8699</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                             7
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12137</td>
+                            <td class=" ">furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">15</td>
+                            <td class=" ">24kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">2699</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class="a-center ">
+                             8
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12138</td>
+                            <td class=" ">Homefurniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">8</td>
+                            <td class=" ">56kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">43699</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                             9
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12139</td>
+                            <td class=" ">Furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">5</td>
+                            <td class=" ">54kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">18699</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+                          <tr class="odd pointer">
+                           <td class="a-center ">
+                             10
+                            </td>
+                            <td class=" "> 
+                                <img src="images/no-profile-image.jpg" / class="img-responsive" style="height: 40px; width: 40px;"></td>
+                            <td class=" ">12140</td>
+                            <td class=" ">kitchen Furniture</td>
+                            <td class=" ">Lorem</td>
+                            <td class=" ">xyz</td>
+                            <td class=" ">5</td>
+                            <td class=" ">74kg</td>
+                            <td class=" ">abc
+                            </td>
+                             <td class=" ">113699</td>
+                              <td class=" ">lorem</td>
+                              
+                                <td class=" ">Lorem sporem</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    </form>
+    <div id="custom_notifications" class="custom-notifications dsp_none">
+        <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+        </ul>
+        <div class="clearfix">
+        </div>
+        <div id="notif-group" class="tabbed_notifications">
+        </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <!-- chart js -->
+    <script src="js/chart.min.js"></script>
+    <!-- bootstrap progress js -->
+    <script src="js/bootstrap-progressbar.min.js"></script>
+    <!-- icheck -->
+    <script src="js/icheck.min.js"></script>
+    <!-- daterangepicker -->
+    <script type="text/javascript" src="js/moment.min2.js"></script>
+    <script type="text/javascript" src="js/daterangepicker.js"></script>
+    <!-- sparkline -->
+    <script src="js/jquery.sparkline.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!-- flot js -->
+    <!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+    <script type="text/javascript" src="js/jquery.flot.js"></script>
+    <script type="text/javascript" src="js/jquery.flot.pie.js"></script>
+    <script type="text/javascript" src="js/jquery.flot.orderBars.js"></script>
+    <script type="text/javascript" src="js/jquery.flot.time.min.js"></script>
+    <script type="text/javascript" src="js/date.js"></script>
+    <script type="text/javascript" src="js/jquery.flot.spline.js"></script>
+    <script type="text/javascript" src="js/jquery.flot.stack.js"></script>
+    <script type="text/javascript" src="js/curvedLines.js"></script>
+    <script type="text/javascript" src="js/jquery.flot.resize.js"></script>
+    <!-- flot -->
+    
+    <!-- /flot -->
+    <!--  -->
+    
+    <!-- -->
+    <!-- datepicker -->
+    
+    <!-- /datepicker https://colorlib.com/polygon/gentelella/tables.html-->
+</body>
+</html>
+

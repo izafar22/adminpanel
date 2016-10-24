@@ -1,36 +1,65 @@
+var fs=require('fs');
 
+var Product = require('mongoose').model('Product');
 
 var playlist = [];
 
+/*var productData={
+productID:"poliu867",
+    sku:"wwweert",
+    description:"greaty"
+}
+*/
 
-exports.addSong=function(req,res,next){
-        console.log(req.body.url);
-        if (playlist.indexOf(req.body.url) == -1) {
-    playlist.push(req.body.url);
-                                 }
-
-	console.log(playlist);
-
-	res.json({"error":0,"errorMsg":"Registered success.", "result": playlist});
+exports.addData=function(req,res,next){
+        console.log(req.body);
+        return;
+       var product1=new Product(req.body);
+       product1.save(function(err,results){
+       	if(!err)
+       	res.json({"error":0,"errorMsg":"Registered success.", "result": results});
+       	else
+       		{console.log(err);}
+       });
       
 };
 
+exports.imageUpload=function(req,res){
+  console.log(req.body); //form fields
+  /* example output:
+  { title: 'abc' }
+ 
+   */
+  console.log(req.file); //form files
+  /* example output:
+            { fieldname: 'upl',
+              originalname: 'grumpy.png',
+              encoding: '7bit',
+              mimetype: 'image/png',
+              destination: './uploads/',
+              filename: '436ec561793aa4dc475a88e84776b1b9',
+              path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
+              size: 277056 }
+   */
+  res.json({"error":0,"errorMsg":"Registered success.", "result": req.file.path});
+  res.status(204).end();
+   
+   console.log(req.file.path);
 
-exports.getPlaylist = function(req,res){
-	if(playlist.length > 0)
-{
-	console.log("---playlist----",playlist);
-	res.json({"error":0,"errorMsg":"Registered success.", "result": playlist});
-}
-else
-{
-	var str="No Song to Play";
- res.json({"error":0,"errorMsg":"Registered success.", "result": str});    
-}
 
 };
 
-exports.deleteSong=function(req,res){
+
+exports.getData = function(req,res){
+	
+	Product.find({}).exec(function(err,result){
+      console.log(result);
+	});
+
+
+};
+
+exports.deleteData=function(req,res){
 	console.log(req.body.url);
 	if(playlist.indexOf(req.body.url)!=-1)
 	{
